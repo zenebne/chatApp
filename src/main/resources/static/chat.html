@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Chat</title>
+
+    <link rel="stylesheet" href="/css/chat.css" />
+</head>
+
+<body>
+
+    <div class="chat-page">
+
+        <aside class="sidebar">
+            <div class="profile-box">
+                <div class="avatar">U</div>
+                <div>
+                    <h3 id="currentUserName">User</h3>
+                    <p>Online</p>
+                </div>
+            </div>
+
+            <div class="contact-box active">
+                <div class="avatar small">F</div>
+                <div>
+                    <h4>Friend</h4>
+                    <p>Click to chat</p>
+                </div>
+            </div>
+
+            <button id="logoutButton" class="logout-button">Log out</button>
+        </aside>
+
+        <main class="chat-container">
+
+            <header class="chat-header">
+                <div class="avatar small">F</div>
+                <div>
+                    <h2>Friend</h2>
+                    <p>Online</p>
+                </div>
+            </header>
+
+            <section id="messageArea" class="message-area">
+
+                <div class="message received">
+                    <p>Hey, welcome to the chat!</p>
+                    <span>12:00</span>
+                </div>
+
+                <div class="message sent">
+                    <p>Hi! This is my first message.</p>
+                    <span>12:01</span>
+                </div>
+
+            </section>
+
+            <form id="messageForm" class="message-form">
+                <input type="text" id="messageInput" placeholder="Type your message..." autocomplete="off" />
+                <button type="submit">Send</button>
+            </form>
+
+        </main>
+
+    </div>
+
+    <script src="/js/chat.js"></script>
+</body>
+
+</html>
