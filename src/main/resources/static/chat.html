@@ -5,9 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Chat</title>
+    <title>ChatApp</title>
 
-    <link rel="stylesheet" href="/css/chat.css" />
+    <link rel="stylesheet" href="/css/chat.css?v=2" />
 </head>
 
 <body>
@@ -16,58 +16,69 @@
 
         <aside class="sidebar">
             <div class="profile-box">
-                <div class="avatar">U</div>
-                <div>
-                    <h3 id="currentUserName">User</h3>
-                    <p>Online</p>
+                <div class="avatar-frame">
+                    <div class="avatar" id="currentUserAvatar" style="cursor: pointer;">U</div>
+                    <input type="file" id="avatarInput" accept="image/*" style="display: none;" />
+                </div>
+                <div class="profile-details">
+                    <div class="name-status">
+                        <h3 id="currentUserName">User</h3>
+                        <select id="userStatusSelect" class="status-select">
+                            <option value="Online">Online</option>
+                            <option value="Busy">Beschäftigt</option>
+                            <option value="Away">Abwesend</option>
+                            <option value="Offline">Als offline anzeigen</option>
+                        </select>
+                    </div>
+                    <input type="text" id="currentUserPersonalMsg" placeholder="&lt;Persönliche Nachricht eingeben&gt;" class="personal-msg-input" />
+                    <button type="button" id="changeAvatarBtn" style="background: transparent; border: none; font-size: 10px; color: #2b579a; text-decoration: underline; cursor: pointer; text-align: left; padding: 2px 0; display: block; margin-top: 4px;">Profilbild ändern</button>
                 </div>
             </div>
 
-            <div class="contact-box active">
-                <div class="avatar small">F</div>
-                <div>
-                    <h4>Friend</h4>
-                    <p>Click to chat</p>
-                </div>
+            <div class="contacts-header">
+                <span>Kontakte</span>
+            </div>
+            
+            <div id="contactsList" class="contacts-list">
+                <!-- Dynamic contacts will be populated here -->
             </div>
 
-            <button id="logoutButton" class="logout-button">Log out</button>
+            <button id="logoutButton" class="logout-button">Abmelden</button>
         </aside>
 
         <main class="chat-container">
 
             <header class="chat-header">
-                <div class="avatar small">F</div>
-                <div>
-                    <h2>Friend</h2>
-                    <p>Online</p>
+                <div class="avatar small" id="activeReceiverAvatar">F</div>
+                <div class="chat-header-info">
+                    <h2 id="chatHeaderName">Freund</h2>
+                    <p id="chatHeaderPersonalMsg" class="header-personal-msg"></p>
                 </div>
+                <span class="app-logo-header" style="margin-left: auto; font-family: 'Segoe UI', Tahoma, sans-serif; font-weight: 800; font-size: 18px; color: #1e395b;">ChatApp</span>
             </header>
 
-            <section id="messageArea" class="message-area">
+            <div class="chat-main-section">
+                
+                <div class="conversation-pane">
+                    <section id="messageArea" class="message-area">
+                        <div class="system-message">
+                            <p>Alle Unterhaltungen werden aus Nostalgiegründen aufgezeichnet.</p>
+                        </div>
+                    </section>
 
-                <div class="message received">
-                    <p>Hey, welcome to the chat!</p>
-                    <span>12:00</span>
+                    <form id="messageForm" class="message-form">
+                        <input type="text" id="messageInput" placeholder="Schreibe eine Nachricht..." autocomplete="off" />
+                        <button type="submit">Senden</button>
+                    </form>
                 </div>
 
-                <div class="message sent">
-                    <p>Hi! This is my first message.</p>
-                    <span>12:01</span>
-                </div>
-
-            </section>
-
-            <form id="messageForm" class="message-form">
-                <input type="text" id="messageInput" placeholder="Type your message..." autocomplete="off" />
-                <button type="submit">Send</button>
-            </form>
+            </div>
 
         </main>
 
     </div>
 
-    <script src="/js/chat.js"></script>
+    <script src="/js/chat.js?v=2"></script>
 </body>
 
 </html>
