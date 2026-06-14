@@ -7,6 +7,11 @@
 
     <title>ChatApp</title>
 
+    <div class="app-header">
+        <h1>ChatApp</h1>
+        <h2 id="formTitle">Willkommen zurück</h2>
+    </div>
+
     <link rel="stylesheet" href="/css/chat.css?v=2" />
 </head>
 
@@ -30,15 +35,18 @@
                             <option value="Offline">Als offline anzeigen</option>
                         </select>
                     </div>
-                    <input type="text" id="currentUserPersonalMsg" placeholder="&lt;Persönliche Nachricht eingeben&gt;" class="personal-msg-input" />
-                    <button type="button" id="changeAvatarBtn" style="background: transparent; border: none; font-size: 10px; color: #2b579a; text-decoration: underline; cursor: pointer; text-align: left; padding: 2px 0; display: block; margin-top: 4px;">Profilbild ändern</button>
+                    <input type="text" id="currentUserPersonalMsg" placeholder="&lt;Persönliche Nachricht eingeben&gt;"
+                        class="personal-msg-input" />
+                    <button type="button" id="changeAvatarBtn"
+                        style="background: transparent; border: none; font-size: 10px; color: #2b579a; text-decoration: underline; cursor: pointer; text-align: left; padding: 2px 0; display: block; margin-top: 4px;">Profilbild
+                        ändern</button>
                 </div>
             </div>
 
             <div class="contacts-header">
                 <span>Kontakte</span>
             </div>
-            
+
             <div id="contactsList" class="contacts-list">
                 <!-- Dynamic contacts will be populated here -->
             </div>
@@ -54,11 +62,12 @@
                     <h2 id="chatHeaderName">Freund</h2>
                     <p id="chatHeaderPersonalMsg" class="header-personal-msg"></p>
                 </div>
-                <span class="app-logo-header" style="margin-left: auto; font-family: 'Segoe UI', Tahoma, sans-serif; font-weight: 800; font-size: 18px; color: #1e395b;">ChatApp</span>
+                <span class="app-logo-header"
+                    style="margin-left: auto; font-family: 'Segoe UI', Tahoma, sans-serif; font-weight: 800; font-size: 18px; color: #1e395b;">ChatApp</span>
             </header>
 
             <div class="chat-main-section">
-                
+
                 <div class="conversation-pane">
                     <section id="messageArea" class="message-area">
                         <div class="system-message">
@@ -67,7 +76,8 @@
                     </section>
 
                     <form id="messageForm" class="message-form">
-                        <input type="text" id="messageInput" placeholder="Schreibe eine Nachricht..." autocomplete="off" />
+                        <input type="text" id="messageInput" placeholder="Schreibe eine Nachricht..."
+                            autocomplete="off" />
                         <button type="submit">Senden</button>
                     </form>
                 </div>

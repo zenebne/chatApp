@@ -5,7 +5,6 @@ import com.example.chatapp.MessageRepository;
 import com.example.chatapp.User;
 import com.example.chatapp.UserDTO;
 import com.example.chatapp.UserRepository;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
@@ -20,9 +19,6 @@ public class ChatController {
 
     private final MessageRepository messageRepository;
     private final UserRepository userRepository;
-
-    @Value("${app.upload.dir}")
-    private String uploadDir;
 
     public ChatController(MessageRepository messageRepository, UserRepository userRepository) {
         this.messageRepository = messageRepository;
@@ -54,7 +50,7 @@ public class ChatController {
     @GetMapping("/users")
     public List<UserDTO> getUsers() {
         return userRepository.findAll().stream()
-                .map(user -> new UserDTO(user.getUsername(), user.getProfilePicture(), user.getStatus(), user.getPersonalMessage()))
+                .map(user -> new UserDTO(user.getUsername(), user.getStatus(), user.getPersonalMessage()))
                 .toList();
     }
 
@@ -88,45 +84,6 @@ public class ChatController {
             return ResponseEntity.ok("Personal message updated.");
         }
         return ResponseEntity.status(404).body("User not found.");
-    }
-
-    @PostMapping("/uploadProfilePicture")
-    public ResponseEntity<String> uploadProfilePicture(@RequestBody UserDTO request) {
-        String username = request.getUsername();
-        String profilePicture = request.getProfilePicture();
-
-        if (username == null || username.trim().isEmpty())
-            return ResponseEntity.badRequest().body("Username cannot be empty.");
-        if (profilePicture == null || profilePicture.trim().isEmpty())
-            return ResponseEntity.badRequest().body("Image data cannot be empty.");
-
-        try {
-            java.nio.file.Path directory = java.nio.file.Paths.get(uploadDir);
-            java.nio.file.Files.createDirectories(directory);
-
-            String base64Data = profilePicture;
-            if (base64Data.contains(",")) {
-                base64Data = base64Data.split(",")[1];
-            }
-
-            byte[] imageBytes = java.util.Base64.getDecoder().decode(base64Data);
-            String safeFilename = "profile_" + java.util.UUID.nameUUIDFromBytes(username.getBytes(java.nio.charset.StandardCharsets.UTF_8)).toString() + ".png";
-            java.nio.file.Path filePath = directory.resolve(safeFilename);
-            java.nio.file.Files.write(filePath, imageBytes);
-
-            Optional<User> userOpt = userRepository.findByUsername(username);
-            if (userOpt.isPresent()) {
-                User user = userOpt.get();
-                String imageUrl = "/media/" + safeFilename;
-                user.setProfilePicture(imageUrl);
-                userRepository.save(user);
-                return ResponseEntity.ok(imageUrl);
-            }
-            return ResponseEntity.status(404).body("User not found.");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).body("Error saving profile picture: " + e.getMessage());
-        }
     }
 
     @PostMapping("/sendMessage")
